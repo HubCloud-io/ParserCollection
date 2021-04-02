@@ -19,12 +19,12 @@ namespace HubCloud.ParserCollection
             _settings = settings;
         }
 
-        public List<Dictionary<string, object>> Parse(string jsonString)
+        public IList<IDictionary<string, object>> Parse(string jsonString)
         {
 
             if (string.IsNullOrEmpty(_settings.NamesPath))
             {
-                throw new ArgumentException("Name path is empty.", nameof(_settings.NamesPath));
+                throw new ArgumentException("Names path is empty.", nameof(_settings.NamesPath));
             }
 
             if (string.IsNullOrEmpty(_settings.ValuesPath))
@@ -32,17 +32,28 @@ namespace HubCloud.ParserCollection
                 throw new ArgumentException("Values path is empty.", nameof(_settings.ValuesPath));
             }
 
-            var result = new List<Dictionary<string, object>>();
+            var result = new List<IDictionary<string, object>>();
 
             var data = JObject.Parse(jsonString);
 
             var namesArray = GetArrayFromObject(data, _settings.NamesPath);
 
-            // Prepare names positions dictionary
-            var namesPositions = PrepareNamesPositions(namesArray);
+            if (namesArray.Count() == 0)
+            {
+                throw new ArgumentException("Names not found. It is possible NamesPath is wrong.", nameof(_settings.NamesPath));
+            }
 
             // Get data
             var items = GetArrayFromObject(data, _settings.ValuesPath);
+
+            if (items.Count() == 0)
+            {
+                throw new ArgumentException("Data not found. It is possible ValuesPath is wrong.", nameof(_settings.ValuesPath));
+            }
+
+            // Prepare names positions dictionary
+            var namesPositions = PrepareNamesPositions(namesArray);
+
 
             foreach (JArray item in items)
             {
