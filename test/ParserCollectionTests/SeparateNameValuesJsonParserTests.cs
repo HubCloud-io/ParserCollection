@@ -124,5 +124,30 @@ namespace ParserCollectionTests
 
         }
 
+        [Test]
+        public void Parse_IsArrays_ReturnData()
+        {
+            var settings = new SeparateNameValuesJsonParserSettings()
+            {
+                NamesPath = "info.fields",
+                ValuesPath = "info.items",
+                IgnoreDoubleNames = true
+            };
+            settings.NamesMapping.Add("id", "id");
+            settings.NamesMapping.Add("Email", "mail");
+            settings.NamesMapping.Add("Tags", "tags");
+
+
+            var parser = new SeparateNameValuesJsonParser(settings);
+            var result = parser.Parse(TestData.ResourceManager.GetString("SeparateNameValuesWithInnerArrays"));
+
+            Assert.AreEqual(2, result.Count);
+
+            var item2 = result[1];
+
+            Assert.AreEqual(3, item2.Count);
+            Assert.AreEqual("tag_1, tag_2", item2["tags"]);
+
+        }
     }
 }

@@ -145,4 +145,18 @@
 	"error": false
 }</value>
   </data>
+  <data name="SeparateNameValuesWithInnerArrays" xml:space="preserve">
+    <value>{
+	"success": true,
+	"error_message": "",
+	"info": {
+		"fields": ["id", "Email", "Name", "Surname", "Phone", "LastActivity", "Tags"],
+		"items": [
+			["1", "email_1@domain.com", "John", "Smit", "+7123456789", "2021-04-01 00:00:52", ["tag_1"]],
+			["2", "email_2@domain.com", "Sara", "Conor", "+7123456711", "2021-04-02 00:01:52", ["tag_1", "tag_2"]]
+		]
+	},
+	"error": false
+}</value>
+  </data>
 </root>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace HubCloud.ParserCollection
 {
@@ -60,18 +61,32 @@ namespace HubCloud.ParserCollection
                 var resultItem = new Dictionary<string, object>();
 
                 var j = -1;
-                foreach (JValue jValue in item)
+                foreach (var jToken in item)
                 {
                     j++;
-                    if (jValue.HasValues)
+
+                    string name = "";
+                    if (!namesPositions.TryGetValue(j, out name))
                     {
                         continue;
                     }
 
-                    var currentValue = jValue.Value;
-                    if (namesPositions.TryGetValue(j, out var name))
+                    if (jToken is JValue jValue)
                     {
+                        if (jValue.HasValues)
+                        {
+                            continue;
+                        }
+
+                        var currentValue = jValue.Value;
                         resultItem.Add(name, currentValue);
+
+                    }
+                    else if (jToken is JArray jArray)
+                    {
+                        var currentValue = BuildArrayPresentation(jArray, ", ");
+                        resultItem.Add(name, currentValue);
+
                     }
 
                 }
@@ -163,6 +178,39 @@ namespace HubCloud.ParserCollection
             }
 
             return namesPositions;
+        }
+
+        private string BuildArrayPresentation(JArray jarray, string separator)
+        {
+            var sb = new StringBuilder();
+
+            foreach(var jToken in jarray)
+            {
+                string currentValue = "";
+                if (jToken is JValue jvalue)
+                {
+                    currentValue = jvalue.Value?.ToString();
+                }
+                else if (jToken is JArray innerArray)
+                {
+                    currentValue = BuildArrayPresentation(innerArray, separator);
+                }
+                else if (jToken is JObject jObject)
+                {
+
+                }
+
+                if (!string.IsNullOrEmpty(currentValue))
+                {
+                    if (sb.Length > 0)
+                    {
+                        sb.Append(separator);
+                    }
+                    sb.Append(currentValue);
+                }
+            }
+
+            return sb.ToString();
         }
     }
 }

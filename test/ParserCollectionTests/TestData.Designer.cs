@@ -99,5 +99,25 @@ namespace ParserCollectionTests {
                 return ResourceManager.GetString("SeparateNameValuesWithDoublesExample", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///	&quot;success&quot;: true,
+        ///	&quot;error_message&quot;: &quot;&quot;,
+        ///	&quot;info&quot;: {
+        ///		&quot;fields&quot;: [&quot;id&quot;, &quot;Email&quot;, &quot;Name&quot;, &quot;Surname&quot;, &quot;Phone&quot;, &quot;LastActivity&quot;, &quot;Tags&quot;],
+        ///		&quot;items&quot;: [
+        ///			[&quot;1&quot;, &quot;email_1@domain.com&quot;, &quot;John&quot;, &quot;Smit&quot;, &quot;+7123456789&quot;, &quot;2021-04-01 00:00:52&quot;, [&quot;tag_1&quot;]],
+        ///			[&quot;2&quot;, &quot;email_2@domain.com&quot;, &quot;Sara&quot;, &quot;Conor&quot;, &quot;+7123456711&quot;, &quot;2021-04-02 00:01:52&quot;, [&quot;tag_1&quot;, &quot;tag_2&quot;]]
+        ///		]
+        ///	},
+        ///	&quot;error&quot;: false
+        ///}.
+        /// </summary>
+        internal static string SeparateNameValuesWithInnerArrays {
+            get {
+                return ResourceManager.GetString("SeparateNameValuesWithInnerArrays", resourceCulture);
+            }
+        }
     }
 }
