@@ -149,5 +149,33 @@ namespace ParserCollectionTests
             Assert.AreEqual("tag_1, tag_2", item2["tags"]);
 
         }
+
+        [Test]
+        public void Parse_RealData_ReturnData()
+        {
+            var settings = new SeparateNameValuesJsonParserSettings()
+            {
+                NamesPath = "info.fields",
+                ValuesPath = "info.items",
+                IgnoreDoubleNames = true
+            };
+
+            settings.NamesMapping.Add("Дата создания", "дата_создания");
+            settings.NamesMapping.Add("Номер", "номер");
+            settings.NamesMapping.Add("Заказ", "заказ");
+            settings.NamesMapping.Add("Платежная система", "платежная_система");
+            settings.NamesMapping.Add("Статус", "статус");
+            settings.NamesMapping.Add("Стоимость, RUB", "сумма");
+            settings.NamesMapping.Add("Комиссия платежной системы", "комиссии");
+            settings.NamesMapping.Add("Получено", "получено");
+            settings.NamesMapping.Add("Email", "email");
+
+
+            var parser = new SeparateNameValuesJsonParser(settings);
+            var result = parser.Parse(TestData.ResourceManager.GetString("SeparateNameValuesRealData1"));
+
+            Assert.Pass();
+
+        }
     }
 }

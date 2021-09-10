@@ -81,6 +81,15 @@ namespace ParserCollectionTests {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {&quot;success&quot;:true,&quot;info&quot;:{&quot;fields&quot;:[&quot;ID заказа&quot;,&quot;Номер&quot;,&quot;ID пользователя&quot;,&quot;Пользователь&quot;,&quot;Email&quot;,&quot;Телефон&quot;,&quot;Дата создания&quot;,&quot;Дата оплаты&quot;,&quot;Title&quot;,&quot;Статус&quot;,&quot;Стоимость, RUB&quot;,&quot;Оплачено&quot;,&quot;Комиссия платежной системы&quot;,&quot;Получено&quot;,&quot;Налог&quot;,&quot;Осталось после вычета комиссии платежной системы и налога&quot;,&quot;Другие комиссии&quot;,&quot;Заработано&quot;,&quot;Валюта&quot;,&quot;Менеджер&quot;,&quot;Город&quot;,&quot;Платежная система&quot;,&quot;ID партнера&quot;,&quot;Использован промо-код&quot;,&quot;Промо-акция&quot;,&quot;Был на вебинаре&quot;,&quot;Заказ&quot;,&quot;Предоплата&quot;,&quot;Оплата&quot;,&quot;Рассрочка от школы&quot;,&quot;Рассрочка от банка&quot;,&quot;cu [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SeparateNameValuesRealData1 {
+            get {
+                return ResourceManager.GetString("SeparateNameValuesRealData1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///	&quot;success&quot;: true,
         ///	&quot;error_message&quot;: &quot;&quot;,
